@@ -22,6 +22,10 @@ end
 
 sendCommand("version")
 
+if server.useAllocsWebAPI and not server.readLogUsingTelnet then
+	tempTimer( 5, [[sendcommand("lp")]] )
+end	
+
 if not botMaintenance.adminItemsOnBlacklist then
 	botMaintenance.adminItemsOnBlacklist = "true"
 	saveBotMaintenance()
