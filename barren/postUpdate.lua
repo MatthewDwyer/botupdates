@@ -4,33 +4,23 @@ if server.allowBotRestarts then
 	tempTimer( 180, [[ restartBot() ]] )
 end
 
---server.updateBranch = "a20"
---conn:execute("UPDATE server set updateBranch = 'a20'")
+--server.updateBranch = "r1"
+--conn:execute("UPDATE server set updateBranch = 'r1'")
+
+if not botMaintenance.fixMapPermissions then
+	botMaintenance.fixMapPermissions = "true"
+	saveBotMaintenance()
+end
+
+sendCommand("version")
+
+if server.useAllocsWebAPI and not server.readLogUsingTelnet then
+	tempTimer( 5, [[sendcommand("lp")]] )
+end
 
 if not botMaintenance.adminItemsOnBlacklist then
 	botMaintenance.adminItemsOnBlacklist = "true"
 	saveBotMaintenance()
-	doSQL("UPDATE badItems SET action = 'ban' WHERE item = '*Admin'")
+	conn:execute("UPDATE badItems SET action = 'ban' WHERE item = '*Admin'")
+	loadBadItems()
 end
-
--- fix an oops
-if not botMaintenance.fixedExile then
-	for k,v in pairs(players) do
-		v.exiled = false
-	end
-
-	conn:execute("UPDATE players SET exiled = 0")
-
-	botMaintenance.fixedExile = "true"
-	saveBotMaintenance()
-end
-
-if tonumber(server.gameVersionNumber) >= 17 then
-	if not botMaintenance.fixedItemNames then
-		botMaintenance.fixedItemNames = "true"
-		saveBotMaintenance()
-		fixShop()
-	end
-end
-
-sendCommand("version")

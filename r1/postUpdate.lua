@@ -9,13 +9,6 @@ if not botMaintenance.fixMapPermissions then
 	saveBotMaintenance()
 end
 
-if tonumber(server.gameVersionNumber) >= 17 then
-	if not botMaintenance.fixedItemNames then
-		botMaintenance.fixedItemNames = "true"
-		saveBotMaintenance()
-	end
-end
-
 sendCommand("version")
 
 if server.useAllocsWebAPI and not server.readLogUsingTelnet then
