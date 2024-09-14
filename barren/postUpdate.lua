@@ -4,8 +4,8 @@ if server.allowBotRestarts then
 	tempTimer( 180, [[ restartBot() ]] )
 end
 
---server.updateBranch = "r1"
---conn:execute("UPDATE server set updateBranch = 'r1'")
+--server.updateBranch = "v1"
+--conn:execute("UPDATE server set updateBranch = 'v1'")
 
 if not botMaintenance.fixMapPermissions then
 	botMaintenance.fixMapPermissions = "true"
